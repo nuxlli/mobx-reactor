@@ -21,8 +21,7 @@ export function action(type, options={}) {
     } else {
       target.__actions__[type].push(action)
     }
-    descriptor = autobind(target, name, descriptor)
-    return descriptor
+    return autobind(target, name, descriptor)
   }
 }
 

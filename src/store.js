@@ -114,7 +114,11 @@ export class Store {
                 }
               }
 
-              processStep(stepper.next())
+              if ("then" in stepper) {
+                stepper.then((value) => processStep({ value, done: true }))
+              } else {
+                processStep(stepper.next())
+              }
             }
           ))
 
@@ -134,7 +138,9 @@ function isGeneratorIterable(value) {
   return (
     value !== null
     && value !== undefined
-    && 'next' in value
-    && 'throw' in value
+    && (
+      ('next' in value && 'throw' in value)
+      || ('then' in value && 'catch' in value)
+    )
   )
 }
