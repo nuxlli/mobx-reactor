@@ -46,6 +46,7 @@ export function connect(storeMap) {
 
       render() {
         return React.createElement(Component, {
+          ...this.props,
           ...this.state,
           ...this.actions
         })

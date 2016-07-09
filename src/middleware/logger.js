@@ -5,6 +5,12 @@ const timer = ((typeof performance !== `undefined`
   && typeof performance.now === `function`)
   ? performance : Date)
 
+if (typeof console.group === 'undefined') {
+  console.group = console.log;
+}
+if (typeof console.groupEnd === 'undefined') {
+  console.groupEnd = () => {};
+}
 
 export const logger = options => store => action => {
   const dispatchTime = new Date()
